@@ -16,6 +16,6 @@ defmodule Pheonix101.Timeline.Post do
     post
     |> cast(attrs, [:body])
     |> validate_required([:body])
-    |> validate_length([:body, min:2, max:250])
+    |> validate_length([:body, min: 2, max: 250])
   end
 end
