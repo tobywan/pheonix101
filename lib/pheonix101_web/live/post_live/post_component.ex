@@ -3,13 +3,13 @@ defmodule Pheonix101Web.PostLive.PostComponent do
   use Pheonix101Web, :live_component
 
   def render(assigns) do
-    ~L"""
+    ~H"""
       <div class="container">
         <%= @post.body %> |
-        <a href="#" phx-click="like" phx-target="<%= @myself %>">
+        <a href="#" phx-click="like" phx-target="{@myself}">
         Like (<%= @post.likes_count %>)
         </a> |
-        <a href="#" phx-click="repost" phx-target="<%= @myself %>">
+        <a href="#" phx-click="repost" phx-target="{@myself}">
         Repost (<%= @post.reposts_count %>)
         </a> |
         <span><%= live_patch "Edit", to: Routes.post_index_path(@socket, :edit, @post) %></span> |
