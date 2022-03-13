@@ -53,6 +53,7 @@ defmodule Pheonix101.Timeline do
     %Post{}
     |> Post.changeset(attrs)
     |> Repo.insert()
+    |> broadcast(:post_created)
   end
 
   @doc """
@@ -71,6 +72,7 @@ defmodule Pheonix101.Timeline do
     post
     |> Post.changeset(attrs)
     |> Repo.update()
+    |> broadcast(:post_created)
   end
 
   @doc """
@@ -100,5 +102,16 @@ defmodule Pheonix101.Timeline do
   """
   def change_post(%Post{} = post, attrs \\ %{}) do
     Post.changeset(post, attrs)
+  end
+
+  def subscribe() do
+    Pheonix.PubSub.subscribe(Pheonix101.PubSub, "posts")
+
+  end
+
+  defp broadcast({:error, _reason} = error, _event), do: error
+  defp broadcast({:ok, post}, event), do
+    Pheonix.PubSub.broadcast(Pheonix101.PubSub, "posts", {event, post} )
+     {:ok, post}
   end
 end
