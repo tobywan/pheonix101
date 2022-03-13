@@ -4,8 +4,8 @@ defmodule Pheonix101.Timeline.Post do
 
   schema "posts" do
     field :body, :string
-    field :likes_count, :integer, default:0
-    field :reposts_count, :integer, default:0
+    field :likes_count, :integer, default: 0
+    field :reposts_count, :integer, default: 0
     field :username, :string, default: "Woodlands_User"
 
     timestamps()
