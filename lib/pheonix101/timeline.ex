@@ -105,13 +105,13 @@ defmodule Pheonix101.Timeline do
   end
 
   def subscribe() do
-    Pheonix.PubSub.subscribe(Pheonix101.PubSub, "posts")
+    Phoenix.PubSub.subscribe(Pheonix101.PubSub, "posts")
 
   end
 
   defp broadcast({:error, _reason} = error, _event), do: error
-  defp broadcast({:ok, post}, event), do
-    Pheonix.PubSub.broadcast(Pheonix101.PubSub, "posts", {event, post} )
+  defp broadcast({:ok, post}, event) do
+    Phoenix.PubSub.broadcast(Pheonix101.PubSub, "posts", {event, post} )
      {:ok, post}
   end
 end
